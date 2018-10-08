@@ -20,7 +20,7 @@ const config = {
     port: 9000,
     hot: true,
     clientLogLevel: 'none',
-    compress: true
+    compress: false
   },
   module: {
     rules: [

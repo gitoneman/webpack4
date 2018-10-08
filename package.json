@@ -7,6 +7,11 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --progress --config webpack.config.js"
   },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -e $GIT_PARAMS"
+    }
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -14,7 +19,10 @@
     "webpack-cli": "^3.1.2"
   },
   "devDependencies": {
+    "@commitlint/cli": "^7.2.0",
+    "@commitlint/config-conventional": "^7.1.2",
     "css-loader": "^1.0.0",
+    "husky": "^1.1.1",
     "style-loader": "^0.23.0",
     "ts-loader": "^5.2.1",
     "typescript": "^3.1.1",
