@@ -5,7 +5,8 @@
   "main": "webpack.config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server --progress --config webpack.config.js",
+    "dev": "webpack-dev-server --progress --profile --config build/webpack.dev.config.js",
+    "build": "node build/build.js",
     "release": "standard-version"
   },
   "husky": {
@@ -16,18 +17,24 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "iview": "^3.1.5",
     "standard-version": "^4.4.0",
+    "vue": "^2.5.17",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^7.2.0",
     "@commitlint/config-conventional": "^7.1.2",
+    "chalk": "^2.4.1",
     "css-loader": "^1.0.0",
     "husky": "^1.1.1",
+    "ora": "^3.0.0",
+    "rimraf": "^2.6.2",
     "style-loader": "^0.23.0",
     "ts-loader": "^5.2.1",
     "typescript": "^3.1.1",
-    "webpack-dev-server": "^3.1.9"
+    "webpack-dev-server": "^3.1.9",
+    "webpack-merge": "^4.1.4"
   }
 }

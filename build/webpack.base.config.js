@@ -1,12 +1,14 @@
 const path = require('path');
 const webpack = require('webpack');
+const config = require('../config')
 function resolve (dir) {
-  return path.join(__dirname, dir)
+  return path.join(__dirname, '..', dir)
 }
-const config = {
-  entry: path.resolve(__dirname, 'src/main.js'),
+const baseWebpackConfig = {
+  context: path.resolve(__dirname, '../'),
+  entry: './src/main.js',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: config.build.assetsRoot,
     filename: "[name].js"
   },
   resolve: {
@@ -14,13 +16,6 @@ const config = {
     alias: {
       '@': resolve('src'),
     }
-  },
-  devServer: {
-    contentBase: path.resolve(__dirname, ''),
-    port: 9000,
-    hot: true,
-    clientLogLevel: 'none',
-    compress: false
   },
   module: {
     rules: [
@@ -36,8 +31,7 @@ const config = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin()
-  ],
-  mode: 'development'
+  ]
 };
 
-module.exports = config;
+module.exports = baseWebpackConfig;
