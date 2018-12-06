@@ -1,6 +1,7 @@
 <template>
   <div class="layout-page ">
     <Button type="primary">这是什么122</Button>
+    <img src="./assets/img/background.png" />
   </div>
 </template>
 
@@ -19,7 +20,7 @@ export default {
     }
   },
   mounted() {
-    console.log(123)
+    // console.log(a)
   }
 }
 </script>

@@ -34,11 +34,24 @@ const baseWebpackConfig = {
       { test: /\.ts$/, use: 'ts-loader' },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-          name: Util.assetsPath('img/[name].[hash:7].[ext]')
-        }
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 3000,
+              name: Util.assetsPath('img/[name].[hash:7].[ext]')
+            }
+          },
+          // {
+          //   loader: 'image-webpack-loader',
+          //   options: {
+          //     pngquant: {
+          //       quality: '65-90',
+          //       speed: 4
+          //     }
+          //   }
+          // }
+        ]
       },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
@@ -51,7 +64,6 @@ const baseWebpackConfig = {
     ]
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
     new VueLoaderPlugin()
   ]
 };

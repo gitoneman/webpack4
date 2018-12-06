@@ -2,8 +2,10 @@ const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin') // webpack4 内置
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const config = require('../config')
 const Util = require('./util')
 const baseWebpackConfig = require('./webpack.base.config')
@@ -25,23 +27,30 @@ const prodWebpackConfig = merge(baseWebpackConfig, {
   performance: {
     hints: false
   },
+  // optimization: {
+  //   splitChunks: {
+  //     cacheGroups: {
+  //       vendor: {
+  //         chunks: "initial",
+  //         test: path.resolve(__dirname, "../node_modules"),
+  //         name: "vendor", // 使用 vendor 入口作为公共部分
+  //         enforce: true
+  //       }
+  //     }
+  //   }
+  // },
   plugins: [
-    // new UglifyJsPlugin({
-    //   uglifyOptions: {
-    //     compress: {
-    //       warnings: false
-    //     }
-    //   },
-    //   sourceMap: config.build.productionSourceMap,
-    //   parallel: true
-    // }),
     new ExtractTextPlugin({
       filename: Util.assetsPath('css/[name].[hash].css'),
-      // Setting the following option to `false` will not extract CSS from codesplit chunks.
-      // Their CSS will instead be inserted dynamically with style-loader when the codesplit chunk has been loaded by webpack.
-      // It's currently set to `true` because we are seeing that sourcemaps are included in the codesplit bundle as well when it's `false`, 
-      // increasing file size: https://github.com/vuejs-templates/webpack/issues/1110
       allChunks: true
+    }),
+    // new MiniCssExtractPlugin({
+    //   filename: Util.assetsPath('css/[name].[contenthash].css')
+    // }),
+    new OptimizeCSSAssetsPlugin({
+      cssProcessorOptions: config.build.productionSourceMap
+        ? { safe: true, map: { inline: false } }
+        : { safe: true }
     }),
     new HtmlWebpackPlugin({
       filename: process.env.NODE_ENV === 'testing'

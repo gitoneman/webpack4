@@ -18,12 +18,14 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     clientLogLevel: 'none',
     compress: false
   },
+  // devtool: config.build.productionSourceMap ? config.dev.devtool : false,
   plugins: [
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'index.html',
       inject: true
-    })
+    }),
+    new webpack.HotModuleReplacementPlugin()
   ],
   mode: 'development'
 });
